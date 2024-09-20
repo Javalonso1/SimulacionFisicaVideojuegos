@@ -54,6 +54,14 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	PxShape* _s = CreateShape(PxSphereGeometry(15));
+
+	Vector4 v(0,1,1,1);
+
+	PxTransform* _t = new PxTransform(Vector3(0,0,0));
+
+	RenderItem* esferan = new RenderItem(_s,_t,v);
 	}
 
 
