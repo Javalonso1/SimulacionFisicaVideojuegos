@@ -7,10 +7,11 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+#include "Vector3D.h"
 
 #include <iostream>
 
-std::string display_text = "This is a test";
+std::string display_text = "";
 
 
 using namespace physx;
@@ -55,13 +56,15 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
+	Vector3D v(0,15,0);
+	/*
 	PxShape* _s = CreateShape(PxSphereGeometry(15));
 
 	Vector4 v(0,1,1,1);
 
 	PxTransform* _t = new PxTransform(Vector3(0,0,0));
 
-	RenderItem* esferan = new RenderItem(_s,_t,v);
+	RenderItem* esferan = new RenderItem(_s,_t,v);*/
 	}
 
 
