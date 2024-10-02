@@ -7,7 +7,8 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-#include "Vector3D.h"
+#include "Particle.h"
+//#include "Vector3D.h"
 
 #include <iostream>
 
@@ -30,6 +31,9 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
+
+Particle* _p;
+float _t = 0.0f;
 
 
 // Initialize physics engine
@@ -56,8 +60,10 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	Vector3D v(0,15,0);
+	_p = new Particle(Vector3(0, 25, 50), Vector3(0, 0, -1), Vector3(0, 0, -0.5), 0.85);
+
 	/*
+	Vector3D v(0,15,0);
 	PxShape* _s = CreateShape(PxSphereGeometry(15));
 
 	Vector4 v(0,1,1,1);
@@ -95,11 +101,12 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
+	
 	}
 
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
-{
+{	
 	PX_UNUSED(camera);
 
 	switch(toupper(key))
@@ -110,7 +117,13 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		break;
 	}
-	default:
+	case 'Q':
+	{		
+		_p->integrate(_t);
+		_t += 0.5f;		
+		break;
+	}
+	default:		
 		break;
 	}
 }
