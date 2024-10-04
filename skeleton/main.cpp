@@ -7,7 +7,8 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-#include "Particle.h"
+#include "Proyectil.h"
+//#include "Particle.h"
 //#include "Vector3D.h"
 
 #include <iostream>
@@ -32,8 +33,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-Particle* _p;
-float _t = 0.0f;
+Proyectil* _p;
 
 
 // Initialize physics engine
@@ -60,7 +60,9 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	_p = new Particle(Vector3(0, 25, 50), Vector3(0, 0, -1), Vector3(0, 0, -0.5), 0.85);
+
+
+	_p = new Proyectil(Vector3(0, 25, 50), Vector3(0, 0, -50), -9.8, 0.98);
 
 	/*
 	Vector3D v(0,15,0);
@@ -83,6 +85,10 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+
+
+	_p->integrate(t);	
 }
 
 // Function to clean data
@@ -117,12 +123,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		break;
 	}
-	case 'Q':
+/*	case 'Q':
 	{		
-		_p->integrate(_t);
+		
 		_t += 0.5f;		
 		break;
-	}
+	}*/
 	default:		
 		break;
 	}

@@ -1,5 +1,5 @@
 #include "Particle.h"
-
+#include <math.h>
 
 Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acel,  double Dumping) : vel(Vel), pos(PxTransform(Pos)), acel(Acel), dumping(Dumping)
 {
@@ -12,10 +12,9 @@ Particle::~Particle()
 }
 
 void Particle::integrate(double t)
-{
-	
-	ModifyVel(t-_timePassed);
-	pos.p = pos.p + (vel *(t - _timePassed))* dumping;
+{	
+	ModifyVel(t);
+	pos.p = pos.p + (vel *t)* pow(dumping, t);
 	Render();
 	_timePassed = t;
 }
@@ -30,5 +29,5 @@ void Particle::Render() {
 	renderItem = new RenderItem(_s, _t, v);
 }
 void Particle::ModifyVel(double t) {
-	vel = vel + acel*t* dumping;
+	vel = vel + acel * t;
 }
