@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <math.h>
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acel,  double Dumping) : vel(Vel), pos(PxTransform(Pos)), acel(Acel), dumping(Dumping)
+Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acel,  double Dumping, double masa) : vel(Vel), pos(PxTransform(Pos)), acel(Acel), dumping(Dumping), masaReal(masa)
 {
 	Render();
 }
@@ -15,7 +15,7 @@ void Particle::integrate(double t)
 {	
 	ModifyVel(t);
 	pos.p = pos.p + (vel *t)* pow(dumping, t);
-	Render();	
+	Render();
 }
 void Particle::Render() {
 	if(renderItem != nullptr) renderItem->release();
@@ -26,6 +26,11 @@ void Particle::Render() {
 
 	PxTransform* _t = new PxTransform(pos.p);
 	renderItem = new RenderItem(_s, _t, v);
+}
+double Particle::masaSim()
+{	
+	double aux = vel.magnitude()/vel.magnitude();
+	return masaReal * pow(aux, 2);
 }
 void Particle::ModifyVel(double t) {
 	vel = vel + acel * t;
