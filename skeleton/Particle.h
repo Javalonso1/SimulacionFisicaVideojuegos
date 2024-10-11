@@ -14,8 +14,7 @@ public:
 	void Render();
 private:
 	Vector3 vel;
-	Vector3 acel;
-	double _timePassed = 0;
+	Vector3 acel;	
 	physx::PxTransform pos;
 	RenderItem* renderItem = nullptr;	
 	float dumping;

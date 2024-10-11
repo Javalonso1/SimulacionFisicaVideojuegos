@@ -15,8 +15,7 @@ void Particle::integrate(double t)
 {	
 	ModifyVel(t);
 	pos.p = pos.p + (vel *t)* pow(dumping, t);
-	Render();
-	_timePassed = t;
+	Render();	
 }
 void Particle::Render() {
 	if(renderItem != nullptr) renderItem->release();

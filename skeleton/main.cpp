@@ -33,7 +33,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-Proyectil* _p;
+std::vector<Proyectil*> _p;
 
 
 // Initialize physics engine
@@ -59,10 +59,7 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-
-
-
-	_p = new Proyectil(Vector3(0, 25, 50), Vector3(0, 0, -50), -9.8, 0.98);
+	
 
 	/*
 	Vector3D v(0,15,0);
@@ -88,7 +85,8 @@ void stepPhysics(bool interactive, double t)
 
 
 
-	_p->integrate(t);	
+	for(int i = 0; i < _p.size(); i++)
+		_p[i]->integrate(t);
 }
 
 // Function to clean data
@@ -123,12 +121,13 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		break;
 	}
-/*	case 'Q':
+	case 'Q':
 	{		
-		
-		_t += 0.5f;		
+		Camera* c;
+		c = GetCamera();		
+		_p.push_back(new Proyectil(c->getTransform().p, c->getDir() * 50, -9.8, 0.98));
 		break;
-	}*/
+	}
 	default:		
 		break;
 	}
