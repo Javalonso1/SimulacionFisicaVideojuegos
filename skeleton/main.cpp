@@ -7,7 +7,9 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+
 #include "Proyectil.h"
+#include "SistemaParticulas.h"
 //#include "Particle.h"
 //#include "Vector3D.h"
 
@@ -34,6 +36,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 std::vector<Proyectil*> _p;
+SistemaParticulas* _s;
 
 
 // Initialize physics engine
@@ -60,6 +63,8 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	
+	_s = new SistemaParticulas(Vector3(0,0,0), Vector3(0,20,0), Vector3(0, -9.8, 0), 0.98, 32,
+			0,4,6);
 
 	/*
 	Vector3D v(0,15,0);
@@ -83,10 +88,12 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
+	_s->integrate(t);
 
 
 	for(int i = 0; i < _p.size(); i++)
 		_p[i]->integrate(t);
+
 }
 
 // Function to clean data
@@ -125,7 +132,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{		
 		Camera* c;
 		c = GetCamera();		
-		_p.push_back(new Proyectil(c->getTransform().p, c->getDir() * 50, -9.8, 0.98));
+		_p.push_back(new Proyectil(c->getTransform().p, c->getDir() * 50, -9.8, 0.98, 32));
 		break;
 	}
 	default:		

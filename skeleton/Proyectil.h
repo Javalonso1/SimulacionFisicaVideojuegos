@@ -4,7 +4,7 @@
 class Proyectil
 {
 public:
-	Proyectil(Vector3 Pos, Vector3 Vel, double grv, double Dumping);
+	Proyectil(Vector3 Pos, Vector3 Vel, double grv, double Dumping, double Masa);
 	~Proyectil();
 
 	void Render();
