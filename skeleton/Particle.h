@@ -14,6 +14,8 @@ public:
 	void Render();
 
 	double masaSim();
+
+	physx::PxTransform _p() { return pos; }
 private:
 	Vector3 vel;
 	Vector3 acel;	

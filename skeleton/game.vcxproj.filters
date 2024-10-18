@@ -14,6 +14,7 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Proyectil.cpp" />
     <ClCompile Include="SistemaParticulas.cpp" />
+    <ClCompile Include="GeneradorParticulas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="SistemaParticulas.h" />
+    <ClInclude Include="GeneradorParticulas.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

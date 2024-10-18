@@ -36,7 +36,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 std::vector<Proyectil*> _p;
-SistemaParticulas* _s;
+SistemaParticulas* _Ps;
 
 
 // Initialize physics engine
@@ -63,8 +63,10 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	
-	_s = new SistemaParticulas(Vector3(0,0,0), Vector3(0,20,0), Vector3(0, -9.8, 0), 0.98, 32,
-			0,4,6);
+	_Ps = new SistemaParticulas();
+
+	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
+	//	_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 90, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, 3, 6);
 
 	/*
 	Vector3D v(0,15,0);
@@ -88,7 +90,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	_s->integrate(t);
+	_Ps->integrate(t);
 
 
 	for(int i = 0; i < _p.size(); i++)
