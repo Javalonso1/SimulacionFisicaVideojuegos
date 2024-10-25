@@ -31,6 +31,7 @@
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="SistemaParticulas.h" />
     <ClInclude Include="GeneradorParticulas.h" />
+    <ClInclude Include="Generators.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

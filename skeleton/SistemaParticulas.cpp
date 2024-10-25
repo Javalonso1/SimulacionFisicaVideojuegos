@@ -28,6 +28,11 @@ void SistemaParticulas::AddGenerator(Vector3 Pos, Vector3 Vel, Vector3 Acel, flo
 	gen.push_back(new GeneradorParticulas(Pos, Vel, Acel, Dumping, Masa, GenTime, elimDist, variation));
 }
 
+void SistemaParticulas::AddGenerator(Vector3 Pos, PartGen g)
+{
+	gen.push_back(new GeneradorParticulas(Pos, g));
+}
+
 void SistemaParticulas::RemoveGenerator(int i)
 {
 	delete gen[i];

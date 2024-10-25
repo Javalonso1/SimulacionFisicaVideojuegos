@@ -17,6 +17,18 @@ GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel,
 	CreateParticle();
 }
 
+GeneradorParticulas::GeneradorParticulas(Vector3 Pos, PartGen g) : pos(Pos), vel(g.Vel), acel(g.Acel), dumping(g.Dumping),
+masaReal(g.Masa), GenTime(g.genTime), Variation(g.variation), timeToNew(0), ElimDist(g.elimDist), ElimTime(g.elimTime), PorTiempo(g.porTiempo)
+{
+	if (!g.porTiempo) {
+		if (ElimDist.x < 0) ElimDist.x = ElimDist.x * -1;
+		if (ElimDist.y < 0) ElimDist.y = ElimDist.y * -1;
+		if (ElimDist.z < 0) ElimDist.z = ElimDist.z * -1;
+	}
+
+	CreateParticle();
+}
+
 GeneradorParticulas::~GeneradorParticulas()
 {
 	for (int i = p.size() - 1; i >= 0; i--) {

@@ -1,6 +1,7 @@
 #pragma once
 #include "RenderUtils.hpp"
 #include "Particle.h"
+#include "Generators.h"
 #include <vector>
 class GeneradorParticulas
 {
@@ -9,6 +10,7 @@ public:
 		double GenTime, double elimTime, double variation);
 	GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa,
 		double GenTime, Vector3 elimDist, double variation);
+	GeneradorParticulas(Vector3 Pos, PartGen g);
 
 	~GeneradorParticulas();
 

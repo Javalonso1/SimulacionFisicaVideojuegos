@@ -66,6 +66,7 @@ void initPhysics(bool interactive)
 	_Ps = new SistemaParticulas();
 
 	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
+	_Ps->AddGenerator(Vector3(0, 0, 0), manguera);
 	//	_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 90, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, 3, 6);
 
 	/*
