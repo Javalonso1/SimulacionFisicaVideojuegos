@@ -24,6 +24,8 @@ private:
 	Vector3 ElimDist;
 	//Si es por tiempo o distancia
 	bool PorTiempo;
+	//Si usa desviación normal o es constante
+	bool constant;
 	
 	double Variation;
 	double GenTime;

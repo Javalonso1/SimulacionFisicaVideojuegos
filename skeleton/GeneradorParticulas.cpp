@@ -5,6 +5,7 @@ GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel,
 	double elimTime, double variation) : vel(Vel), pos(Pos), acel(Acel), dumping(Dumping),
 	masaReal(Masa), GenTime(genTime), ElimTime(elimTime), Variation(variation), timeToNew(0), PorTiempo(true)
 {
+	constant = Variation == 0;	
 	CreateParticle();
 }
 GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa, double genTime,
@@ -74,14 +75,24 @@ void GeneradorParticulas::integrate(double t)
 
 void GeneradorParticulas::CreateParticle()
 {
-	std::random_device rd{};
-	std::mt19937 gen{ rd() };
-	std::normal_distribution<double> normal_x(vel.x, Variation);
-	double _x = normal_x(gen);
-	std::normal_distribution<double> normal_y(vel.y, Variation);
-	double _y = normal_y(gen);
-	std::normal_distribution<double> normal_z(vel.z, Variation);
-	double _z = normal_z(gen);
+	double _x;
+	double _y;
+	double _z;
+	if (constant) {
+		_x = vel.x;
+		_y = vel.y;
+		_z = vel.z;
+	}
+	else {
+		std::random_device rd{};
+		std::mt19937 gen{ rd() };
+		std::normal_distribution<double> normal_x(vel.x, Variation);
+		_x = normal_x(gen);
+		std::normal_distribution<double> normal_y(vel.y, Variation);
+		_y = normal_y(gen);
+		std::normal_distribution<double> normal_z(vel.z, Variation);
+		_z = normal_z(gen);
+	}
 	Vector3 _v(_x, _y, _z);
 
 	Particle* _p = new Particle(pos, _v, acel, dumping, masaReal);
