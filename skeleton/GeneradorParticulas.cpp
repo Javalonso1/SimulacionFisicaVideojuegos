@@ -15,6 +15,7 @@ GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel,
 	if (ElimDist.x < 0) ElimDist.x = ElimDist.x * -1;
 	if (ElimDist.y < 0) ElimDist.y = ElimDist.y * -1;
 	if (ElimDist.z < 0) ElimDist.z = ElimDist.z * -1;
+	constant = Variation == 0;
 	CreateParticle();
 }
 
@@ -26,7 +27,7 @@ masaReal(g.Masa), GenTime(g.genTime), Variation(g.variation), timeToNew(0), Elim
 		if (ElimDist.y < 0) ElimDist.y = ElimDist.y * -1;
 		if (ElimDist.z < 0) ElimDist.z = ElimDist.z * -1;
 	}
-
+	constant = Variation == 0;
 	CreateParticle();
 }
 
