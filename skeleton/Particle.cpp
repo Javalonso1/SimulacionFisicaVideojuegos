@@ -2,7 +2,8 @@
 #include <math.h>
 
 Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acel,  double Dumping, double masa) : vel(Vel), pos(PxTransform(Pos)), acel(Acel), dumping(Dumping), masaReal(masa)
-{
+{	
+	recalculateFuerza();
 	Render();
 }
 
@@ -14,7 +15,7 @@ Particle::~Particle()
 void Particle::integrate(double t)
 {	
 	ModifyVel(t);
-	pos.p = pos.p + (vel *t)* pow(dumping, t);
+	pos.p = pos.p + (vel *t)* pow(dumping, t);	
 	Render();
 }
 void Particle::Render() {
@@ -31,6 +32,15 @@ double Particle::masaSim()
 {	
 	double aux = vel.magnitude()/vel.magnitude();
 	return masaReal * pow(aux, 2);
+}
+void Particle::recalculateFuerza()
+{
+	fuerza = masaReal * acel;
+}
+void Particle::SetFuerza(Vector3 f)
+{
+	fuerza = f;
+	acel = fuerza / masaReal;
 }
 void Particle::ModifyVel(double t) {
 	vel = vel + acel * t;

@@ -24,4 +24,5 @@ public:
 };
 
 const PartGen manguera(Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32, 0, Vector3(50, 80, 50), 6);
-const PartGen PruebaFuerzas1(Vector3(0, 30, 0), Vector3(0, 0, 0), 0.98, 32, 0, 5, 6);
+const PartGen PruebaFuerzas1(Vector3(0, 30, 0), Vector3(0, 0, 0), 0.98, 32, 0, 25, 6);
+const PartGen PruebaFuerzas2(Vector3(0, -20, 0), Vector3(0, 0, 0), 0.98, 190, 0, 25, 6);

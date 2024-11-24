@@ -10,17 +10,25 @@ public:
 
 	void integrate(double t);
 
-	
+
 	void Render();
 
 	double masaSim();
 
 	physx::PxTransform _p() { return pos; }
+
+	Vector3 Fuerza() { return fuerza; }
+
+	void recalculateFuerza();
+	void SetFuerza(Vector3 f);
+
+	Vector3 getVel() { return vel;}
 private:
 	Vector3 vel;
 	Vector3 acel;	
+	Vector3 fuerza;
 	physx::PxTransform pos;
-	RenderItem* renderItem = nullptr;	
+	RenderItem* renderItem = nullptr;		
 	float dumping;
 	double masaReal;
 	void ModifyVel(double t);

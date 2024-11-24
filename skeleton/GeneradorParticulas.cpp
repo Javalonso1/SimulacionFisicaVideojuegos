@@ -46,6 +46,12 @@ void GeneradorParticulas::integrate(double t)
 		CreateParticle();
 	}
 	for (int i = 0; i < p.size(); i++) {
+		for (int j = 0; j < myForces.size(); j++) {
+			if (myForces[j]->Afecta(p[i])) {
+				myForces[j]->AddForce(p[i]);
+			}
+		}
+
 		if (PorTiempo) {
 			time_p[i] += t;
 			if (time_p[i] >= ElimTime) {

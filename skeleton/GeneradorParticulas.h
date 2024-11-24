@@ -2,6 +2,7 @@
 #include "RenderUtils.hpp"
 #include "Particle.h"
 #include "Generators.h"
+#include "ForceGenerator.h"
 #include <vector>
 class GeneradorParticulas
 {
@@ -16,6 +17,7 @@ public:
 
 	void integrate(double t);
 
+	void AddForce(ForceGenerator* f) { myForces.push_back(f); }
 	
 private:
 	//Por tiempo
@@ -35,6 +37,7 @@ private:
 	float dumping;
 	double masaReal;
 
+	std::vector<ForceGenerator*> myForces;
 	std::vector<Particle*> p;
 	std::vector<double> time_p;
 	double timeToNew;
