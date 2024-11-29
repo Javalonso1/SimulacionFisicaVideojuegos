@@ -47,9 +47,19 @@ bool ForceGenerator::Afecta(Particle* p)
 
 void ForceGenerator::AddForce(Particle* p)
 {
-	if (myTipeforce == Viento) {
-		Vector3 f = v - p->getVel();
-		p->SetFuerza(f);		
+	Vector3 f;
+	switch (myTipeforce)
+	{
+	case ForceGenerator::Viento:
+		f = v - p->getVel();
+		p->AddFuerza(f);
+		break;
+	case ForceGenerator::Gravedad:
+		f = Vector3(0,p->masaSim()*-9.8, 0);
+		p->AddFuerza(f);
+		break;
+	default:
+		break;
 	}
 }
 

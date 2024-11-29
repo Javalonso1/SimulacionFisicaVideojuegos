@@ -69,7 +69,8 @@ void initPhysics(bool interactive)
 	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
 	GeneradorParticulas* _g =_Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas1);
 	//GeneradorParticulas* _g2 = _Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas2);
-	_g->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 500)));
+	_g->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 150)));
+	_g->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 0, 0)));
 	//_g->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 15), Vector3(-10,-10,-10), Vector3(10, 10, 10)));
 	//_g2->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 15)));
 	//	_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 90, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, 3, 6);

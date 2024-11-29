@@ -14,9 +14,11 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {	
+	acel = fuerza / masaReal;
 	ModifyVel(t);
 	pos.p = pos.p + (vel *t)* pow(dumping, t);	
 	Render();
+	fuerza = Vector3(0, 0, 0);
 }
 void Particle::Render() {
 	if(renderItem != nullptr) renderItem->release();
@@ -35,12 +37,12 @@ double Particle::masaSim()
 }
 void Particle::recalculateFuerza()
 {
-	fuerza = masaReal * acel;
+	fuerza = masaReal * acel;	
 }
-void Particle::SetFuerza(Vector3 f)
+void Particle::AddFuerza(Vector3 f)
 {
-	fuerza = f;
-	acel = fuerza / masaReal;
+	fuerza += f;
+	//acel = fuerza / masaReal;
 }
 void Particle::ModifyVel(double t) {
 	vel = vel + acel * t;

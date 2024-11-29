@@ -22,6 +22,8 @@ public:
 	void recalculateFuerza();
 	void SetFuerza(Vector3 f);
 
+	void AddFuerza(Vector3 f);
+
 	Vector3 getVel() { return vel;}
 private:
 	Vector3 vel;
