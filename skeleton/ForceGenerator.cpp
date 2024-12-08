@@ -33,15 +33,21 @@ ForceGenerator::~ForceGenerator()
 {
 }
 
+
 bool ForceGenerator::Afecta(Particle* p)
 {
-	if (Global) return true;
-	if (Area) {
-		return (p->_p().p.x > Point1.x && p->_p().p.x < Point2.x) &&
-			(p->_p().p.y > Point1.y && p->_p().p.y < Point2.y) &&
-			(p->_p().p.z > Point1.z && p->_p().p.z < Point2.z);		
+	if (myTipeforce == ForceGenerator::Torbellino) {
+		Vector3 v = Vector3(p->_p().p.x - _torbCenter.x, p->_p().p.y - _torbCenter.y, p->_p().p.z - _torbCenter.z);
+		return v.magnitude() < _torbRadius;
 	}
-
+	else {
+		if (Global) return true;
+		if (Area) {
+			return (p->_p().p.x > Point1.x && p->_p().p.x < Point2.x) &&
+				(p->_p().p.y > Point1.y && p->_p().p.y < Point2.y) &&
+				(p->_p().p.z > Point1.z && p->_p().p.z < Point2.z);
+		}
+	}
 	return false;
 }
 
@@ -54,9 +60,14 @@ void ForceGenerator::AddForce(Particle* p)
 		f = v - p->getVel();
 		p->AddFuerza(f);
 		break;
+	case ForceGenerator::Torbellino:
+		f = Vector3(-1*(p->_p().p.z-_torbCenter.z), _torbPosY-(p->_p().p.y-_torbCenter.y), p->_p().p.x-_torbCenter.x);
+		p->AddFuerza(f*v.magnitude());		
+		break;
 	case ForceGenerator::Gravedad:
 		f = Vector3(0,p->masaSim()*-9.8, 0);
 		p->AddFuerza(f);
+		v.magnitude();
 		break;
 	default:
 		break;
