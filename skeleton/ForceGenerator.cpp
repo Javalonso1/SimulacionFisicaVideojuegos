@@ -1,5 +1,6 @@
 #include "ForceGenerator.h"
-
+#include <cmath>
+#include <iostream>
 ForceGenerator::ForceGenerator(TipeForces t, Vector3 _v) : myTipeforce(t), v(_v)
 {	
 	Global = true;
@@ -36,9 +37,8 @@ ForceGenerator::~ForceGenerator()
 
 bool ForceGenerator::Afecta(Particle* p)
 {
-	if (myTipeforce == ForceGenerator::Torbellino) {
-		Vector3 v = Vector3(p->_p().p.x - _torbCenter.x, p->_p().p.y - _torbCenter.y, p->_p().p.z - _torbCenter.z);
-		return v.magnitude() < _torbRadius;
+	if (myTipeforce == ForceGenerator::Torbellino) {		
+		return (p->_p().p - Center).magnitude() < Radius;
 	}
 	else {
 		if (Global) return true;
@@ -51,8 +51,9 @@ bool ForceGenerator::Afecta(Particle* p)
 	return false;
 }
 
-void ForceGenerator::AddForce(Particle* p)
+void ForceGenerator::AddForce(Particle* p, double t)
 {
+	double r;
 	Vector3 f;
 	switch (myTipeforce)
 	{
@@ -60,8 +61,20 @@ void ForceGenerator::AddForce(Particle* p)
 		f = v - p->getVel();
 		p->AddFuerza(f);
 		break;
+	case ForceGenerator::Explosion:
+		_explT += t;
+		r = (p->_p().p - Center).magnitude();
+		if (r < Radius) {			
+			double d;
+			d = v.magnitude() / pow(r, 2);
+			double xd = pow(2.7182818, (-1 * (_explT / _explTMax)));			
+			d = d * xd;			
+			f = p->_p().p - Center;
+			p->AddFuerza(f*d);
+		}		
+		break;
 	case ForceGenerator::Torbellino:
-		f = Vector3(-1*(p->_p().p.z-_torbCenter.z), _torbPosY-(p->_p().p.y-_torbCenter.y), p->_p().p.x-_torbCenter.x);
+		f = Vector3(-1*(p->_p().p.z- Center.z), _torbPosY-(p->_p().p.y- Center.y), p->_p().p.x- Center.x);
 		p->AddFuerza(f*v.magnitude());		
 		break;
 	case ForceGenerator::Gravedad:

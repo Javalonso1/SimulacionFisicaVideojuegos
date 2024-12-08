@@ -38,7 +38,7 @@ ContactReportCallback gContactReportCallback;
 
 std::vector<Proyectil*> _p;
 SistemaParticulas* _Ps;
-
+GeneradorParticulas* _g;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -67,7 +67,7 @@ void initPhysics(bool interactive)
 	_Ps = new SistemaParticulas();
 
 	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
-	GeneradorParticulas* _g =_Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas3);
+	_g =_Ps->AddGenerator(Vector3(0, 10, 0), PruebaFuerzas3);
 	//GeneradorParticulas* _g2 = _Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas2);
 	/*
 	ForceGenerator* _f = new ForceGenerator(ForceGenerator::Torbellino, Vector3(0, 0, 10));
@@ -147,6 +147,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		Camera* c;
 		c = GetCamera();		
 		_p.push_back(new Proyectil(c->getTransform().p, c->getDir() * 50, -9.8, 0.98, 32));
+		break;
+	}
+	case 'E':
+	{		
+		ForceGenerator* _f = new ForceGenerator(ForceGenerator::Explosion, Vector3(0, 0, 15000));				
+		_g->AddForce(_f);
 		break;
 	}
 	default:		

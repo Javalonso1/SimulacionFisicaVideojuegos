@@ -39,7 +39,7 @@ GeneradorParticulas::~GeneradorParticulas()
 }
 
 void GeneradorParticulas::integrate(double t)
-{
+{	
 	timeToNew += t;
 	if (timeToNew >= GenTime) {
 		timeToNew -= GenTime;
@@ -48,7 +48,7 @@ void GeneradorParticulas::integrate(double t)
 	for (int i = 0; i < p.size(); i++) {
 		for (int j = 0; j < myForces.size(); j++) {
 			if (myForces[j]->Afecta(p[i])) {
-				myForces[j]->AddForce(p[i]);
+				myForces[j]->AddForce(p[i],t);
 			}
 		}
 
@@ -81,7 +81,7 @@ void GeneradorParticulas::integrate(double t)
 }
 
 void GeneradorParticulas::CreateParticle()
-{
+{	
 	double _x;
 	double _y;
 	double _z;

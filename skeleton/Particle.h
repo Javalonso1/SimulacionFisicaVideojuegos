@@ -19,8 +19,7 @@ public:
 
 	Vector3 Fuerza() { return fuerza; }
 
-	void recalculateFuerza();
-	void SetFuerza(Vector3 f);
+	void recalculateFuerza();	
 
 	void AddFuerza(Vector3 f);
 
