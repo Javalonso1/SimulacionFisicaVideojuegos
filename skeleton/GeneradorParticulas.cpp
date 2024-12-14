@@ -40,10 +40,12 @@ GeneradorParticulas::~GeneradorParticulas()
 
 void GeneradorParticulas::integrate(double t)
 {	
-	timeToNew += t;
-	if (timeToNew >= GenTime) {
-		timeToNew -= GenTime;
-		CreateParticle();
+	if (maxPart < 0 || p.size() < maxPart) {
+		timeToNew += t;
+		if (timeToNew >= GenTime) {
+			timeToNew -= GenTime;
+			CreateParticle();
+		}
 	}
 	for (int i = 0; i < p.size(); i++) {
 		for (int j = 0; j < myForces.size(); j++) {

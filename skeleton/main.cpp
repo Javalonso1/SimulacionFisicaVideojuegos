@@ -68,14 +68,24 @@ void initPhysics(bool interactive)
 	_Ps = new SistemaParticulas();
 
 
-	//Muelle* m = new Muelle(Vector3(0, 30, 0), 1000, 10, 0.98, 32);
-	Muelle* m = new Muelle(Vector3(0, 30, 0), 1000, 25, 0.98, 32, new Particle(Vector3(0, 30, 20), Vector3(0, 0.1, 0), Vector3(0, 0, 0), 0.98, 32));
+	//Muelle* m = new Muelle(Vector3(0, 30, 0), 100, 10, 0.98, 32);
+	//Muelle* m = new Muelle(Vector3(0, 30, 0), 400, 25, 0.98, 32, new Particle(Vector3(0, 30, 20), Vector3(0, 0.1, 0), Vector3(0, 0, 0), 0.98, 32));
 	//m->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 0, 0)));
 	//m->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 150)));
-	_Ps->AddMuelle(m);
+	//_Ps->AddMuelle(m);
 
 	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
-	//_g =_Ps->AddGenerator(Vector3(0, 10, 0), PruebaFuerzas3);
+	_g =_Ps->AddGenerator(Vector3(0, 31, 0), PruebaFuerzas4);
+	_g->maxParticulas(1);
+	_g->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 10, 0)));
+	_g->AddForce(new ForceGenerator(ForceGenerator::Flotacion, Vector3(0, 30, 0)));
+
+	PxShape* _s = CreateShape(PxBoxGeometry(100, 0.1, 100));
+
+	Vector4 v(0, 0, 1, 0.5);
+
+	PxTransform* _t = new PxTransform(Vector3(0,30,0));
+	RenderItem* r = new RenderItem(_s, _t, v);
 
 	//GeneradorParticulas* _g2 = _Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas2);
 	/*

@@ -18,6 +18,8 @@ public:
 	void integrate(double t);
 
 	void AddForce(ForceGenerator* f) { myForces.push_back(f); }
+
+	void maxParticulas(int i) { maxPart = i; };
 	
 private:
 	//Por tiempo
@@ -36,6 +38,8 @@ private:
 	Vector3 pos;
 	float dumping;
 	double masaReal;
+
+	int maxPart = -1;
 
 	std::vector<ForceGenerator*> myForces;
 	std::vector<Particle*> p;

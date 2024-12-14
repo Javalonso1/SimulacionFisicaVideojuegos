@@ -79,8 +79,29 @@ void ForceGenerator::AddForce(Particle* p, double t)
 		break;
 	case ForceGenerator::Gravedad:
 		f = Vector3(0,p->masaSim()*-9.8, 0);
+		p->AddFuerza(f);				
+		break;
+	case ForceGenerator::Flotacion:		
+		float _height;
+		_height= 1.0f;
+		float h;
+		h= p->getPos().y;
+		float h0;
+		h0= v.y;
+		float immersed;
+		if (h - h0 > _height * 0.5) {
+			immersed = 0.0;
+		}
+		else if (h0 - h > _height * 0.5) {
+			immersed = 1.0;
+		}
+		else {
+			immersed = (h0 - h) / _height + 0.5;
+		}
+		f.y = _liquid_density * _volume * immersed * 9.8;				
+
 		p->AddFuerza(f);
-		v.magnitude();
+
 		break;
 	default:
 		break;
