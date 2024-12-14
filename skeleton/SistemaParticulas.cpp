@@ -16,6 +16,9 @@ void SistemaParticulas::integrate(double t)
 	for (int i = 0; i < gen.size(); i++) {
 		gen[i]->integrate(t);
 	}
+	for (int i = 0; i < mue.size(); i++) {
+		mue[i]->integrate(t);
+	}
 }
 
 void SistemaParticulas::AddGenerator(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa, double GenTime, double elimTime, double variation)
@@ -39,4 +42,9 @@ void SistemaParticulas::RemoveGenerator(int i)
 {
 	delete gen[i];
 	gen.erase(gen.begin() + i);
+}
+
+void SistemaParticulas::AddMuelle(Muelle* m)
+{
+	mue.push_back(m);
 }

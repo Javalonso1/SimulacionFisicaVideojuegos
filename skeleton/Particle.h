@@ -24,6 +24,8 @@ public:
 	void AddFuerza(Vector3 f);
 
 	Vector3 getVel() { return vel;}
+
+	Vector3 getPos() { return pos.p; }
 private:
 	Vector3 vel;
 	Vector3 acel;	

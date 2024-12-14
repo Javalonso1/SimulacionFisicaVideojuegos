@@ -11,6 +11,7 @@
 #include "Proyectil.h"
 #include "SistemaParticulas.h"
 #include "ForceGenerator.h"
+#include "Muelle.h"
 //#include "Particle.h"
 //#include "Vector3D.h"
 
@@ -66,8 +67,15 @@ void initPhysics(bool interactive)
 	
 	_Ps = new SistemaParticulas();
 
+
+	Muelle* m = new Muelle(Vector3(0, 30, 0), 1000, 10, 0.98, 32);
+	m->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 0, 0)));
+	//m->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 150)));
+	_Ps->AddMuelle(m);
+
 	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
-	_g =_Ps->AddGenerator(Vector3(0, 10, 0), PruebaFuerzas3);
+	//_g =_Ps->AddGenerator(Vector3(0, 10, 0), PruebaFuerzas3);
+
 	//GeneradorParticulas* _g2 = _Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas2);
 	/*
 	ForceGenerator* _f = new ForceGenerator(ForceGenerator::Torbellino, Vector3(0, 0, 10));

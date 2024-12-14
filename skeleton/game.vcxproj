@@ -257,6 +257,7 @@
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GeneradorParticulas.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Muelle.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Proyectil.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GeneradorParticulas.h" />
     <ClInclude Include="Generators.h" />
+    <ClInclude Include="Muelle.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="RenderUtils.hpp" />
