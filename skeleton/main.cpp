@@ -68,8 +68,9 @@ void initPhysics(bool interactive)
 	_Ps = new SistemaParticulas();
 
 
-	Muelle* m = new Muelle(Vector3(0, 30, 0), 1000, 10, 0.98, 32);
-	m->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 0, 0)));
+	//Muelle* m = new Muelle(Vector3(0, 30, 0), 1000, 10, 0.98, 32);
+	Muelle* m = new Muelle(Vector3(0, 30, 0), 1000, 25, 0.98, 32, new Particle(Vector3(0, 30, 20), Vector3(0, 0.1, 0), Vector3(0, 0, 0), 0.98, 32));
+	//m->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 0, 0)));
 	//m->AddForce(new ForceGenerator(ForceGenerator::Viento, Vector3(0, 0, 150)));
 	_Ps->AddMuelle(m);
 
