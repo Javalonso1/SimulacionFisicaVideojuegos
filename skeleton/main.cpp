@@ -12,6 +12,8 @@
 #include "SistemaParticulas.h"
 #include "ForceGenerator.h"
 #include "Muelle.h"
+#include "SolidRigidStatic.h"
+#include "SolidRigidDynamic.h"
 //#include "Particle.h"
 //#include "Vector3D.h"
 
@@ -66,8 +68,11 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 	
 	_Ps = new SistemaParticulas();
-
-
+	
+	SolidRigidStatic* sol = new SolidRigidStatic(gScene, gPhysics, new PxTransform(0,0,0), CreateShape(PxBoxGeometry(100,0.1,100)), gMaterial);
+	SolidRigidDynamic* din = new SolidRigidDynamic(gScene, gPhysics, new PxTransform(0, 50, 0), CreateShape(PxBoxGeometry(6, 6, 6)), gMaterial, 0.15);
+	
+	
 	//Muelle* m = new Muelle(Vector3(0, 30, 0), 100, 10, 0.98, 32);
 	//Muelle* m = new Muelle(Vector3(0, 30, 0), 400, 25, 0.98, 32, new Particle(Vector3(0, 30, 20), Vector3(0, 0.1, 0), Vector3(0, 0, 0), 0.98, 32));
 	//m->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 0, 0)));
@@ -75,6 +80,7 @@ void initPhysics(bool interactive)
 	//_Ps->AddMuelle(m);
 
 	//_Ps->AddGenerator(Vector3(0, 0, 0), Vector3(0, 30, 0), Vector3(0, -9.8, 0), 0.98, 32,		0, Vector3(50, 80, 50), 6);
+	/*
 	_g =_Ps->AddGenerator(Vector3(0, 31, 0), PruebaFuerzas4);
 	_g->maxParticulas(1);
 	_g->AddForce(new ForceGenerator(ForceGenerator::Gravedad, Vector3(0, 10, 0)));
@@ -86,6 +92,7 @@ void initPhysics(bool interactive)
 
 	PxTransform* _t = new PxTransform(Vector3(0,30,0));
 	RenderItem* r = new RenderItem(_s, _t, v);
+	*/
 
 	//GeneradorParticulas* _g2 = _Ps->AddGenerator(Vector3(0, 0, 0), PruebaFuerzas2);
 	/*

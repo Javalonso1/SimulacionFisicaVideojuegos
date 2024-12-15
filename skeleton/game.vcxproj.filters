@@ -17,6 +17,8 @@
     <ClCompile Include="GeneradorParticulas.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="Muelle.cpp" />
+    <ClCompile Include="SolidRigidStatic.cpp" />
+    <ClCompile Include="SolidRigidDynamic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -36,6 +38,8 @@
     <ClInclude Include="Generators.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="Muelle.h" />
+    <ClInclude Include="SolidRigidStatic.h" />
+    <ClInclude Include="SolidRigidDynamic.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -264,6 +264,8 @@
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="SistemaParticulas.cpp" />
+    <ClCompile Include="SolidRigidDynamic.cpp" />
+    <ClCompile Include="SolidRigidStatic.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +281,8 @@
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="SistemaParticulas.h" />
+    <ClInclude Include="SolidRigidDynamic.h" />
+    <ClInclude Include="SolidRigidStatic.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
