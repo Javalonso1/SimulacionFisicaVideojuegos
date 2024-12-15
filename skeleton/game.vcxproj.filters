@@ -19,6 +19,7 @@
     <ClCompile Include="Muelle.cpp" />
     <ClCompile Include="SolidRigidStatic.cpp" />
     <ClCompile Include="SolidRigidDynamic.cpp" />
+    <ClCompile Include="GeneradorSolidosRigidos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Muelle.h" />
     <ClInclude Include="SolidRigidStatic.h" />
     <ClInclude Include="SolidRigidDynamic.h" />
+    <ClInclude Include="GeneradorSolidosRigidos.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -11,3 +11,8 @@ SolidRigidStatic::SolidRigidStatic(PxScene* sc, PxPhysics* p, PxTransform* t, Px
 
 	mRender = new RenderItem(s, mRigidStatic, Vector4(1, 1, 1, 1));
 }
+
+SolidRigidStatic::~SolidRigidStatic()
+{
+
+}

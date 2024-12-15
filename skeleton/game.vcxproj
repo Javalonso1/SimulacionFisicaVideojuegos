@@ -256,6 +256,7 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GeneradorParticulas.cpp" />
+    <ClCompile Include="GeneradorSolidosRigidos.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Muelle.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -273,6 +274,7 @@
     <ClInclude Include="core.hpp" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GeneradorParticulas.h" />
+    <ClInclude Include="GeneradorSolidosRigidos.h" />
     <ClInclude Include="Generators.h" />
     <ClInclude Include="Muelle.h" />
     <ClInclude Include="Particle.h" />

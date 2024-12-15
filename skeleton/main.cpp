@@ -14,6 +14,7 @@
 #include "Muelle.h"
 #include "SolidRigidStatic.h"
 #include "SolidRigidDynamic.h"
+#include "GeneradorSolidosRigidos.h"
 //#include "Particle.h"
 //#include "Vector3D.h"
 
@@ -42,7 +43,7 @@ ContactReportCallback gContactReportCallback;
 std::vector<Proyectil*> _p;
 SistemaParticulas* _Ps;
 GeneradorParticulas* _g;
-
+GeneradorSolidosRigidos* _gSR;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -70,8 +71,8 @@ void initPhysics(bool interactive)
 	_Ps = new SistemaParticulas();
 	
 	SolidRigidStatic* sol = new SolidRigidStatic(gScene, gPhysics, new PxTransform(0,0,0), CreateShape(PxBoxGeometry(100,0.1,100)), gMaterial);
-	SolidRigidDynamic* din = new SolidRigidDynamic(gScene, gPhysics, new PxTransform(0, 50, 0), CreateShape(PxBoxGeometry(6, 6, 6)), gMaterial, 0.15);
-	
+	_gSR = new GeneradorSolidosRigidos(new PxTransform(0, 50, 0), Vector3(0,0,0), 2, 80, 10, gScene, gPhysics, CreateShape(PxBoxGeometry(1, 1, 1)), gMaterial, 0.15);
+	//SolidRigidDynamic* din = new SolidRigidDynamic(gScene, gPhysics, new PxTransform(0, 50, 0), CreateShape(PxBoxGeometry(6, 6, 6)), gMaterial, 0.15);
 	
 	//Muelle* m = new Muelle(Vector3(0, 30, 0), 100, 10, 0.98, 32);
 	//Muelle* m = new Muelle(Vector3(0, 30, 0), 400, 25, 0.98, 32, new Particle(Vector3(0, 30, 20), Vector3(0, 0.1, 0), Vector3(0, 0, 0), 0.98, 32));
@@ -130,6 +131,7 @@ void stepPhysics(bool interactive, double t)
 
 	_Ps->integrate(t);
 
+	_gSR->integrate(t);
 
 	for(int i = 0; i < _p.size(); i++)
 		_p[i]->integrate(t);
@@ -177,8 +179,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case 'E':
 	{		
-		ForceGenerator* _f = new ForceGenerator(ForceGenerator::Explosion, Vector3(0, 0, 15000));				
-		_g->AddForce(_f);
+		ForceGenerator* _f = new ForceGenerator(ForceGenerator::Explosion, Vector3(0, 0, 700));				
+		if(_g!=nullptr)_g->AddForce(_f);
+		if(_gSR!=nullptr)_gSR->AddForce(_f);
 		break;
 	}
 	default:		

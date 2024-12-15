@@ -5,6 +5,7 @@ class SolidRigidStatic
 {
 public:
 	SolidRigidStatic(PxScene* sc,PxPhysics* p, PxTransform* t, PxShape* s, PxMaterial* m);
+	~SolidRigidStatic();
 private:
 	PxScene* gScene;
 	PxPhysics* gPhysics;

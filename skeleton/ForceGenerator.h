@@ -1,5 +1,6 @@
 #pragma once
 #include "Particle.h"
+#include "SolidRigidDynamic.h"
 class ForceGenerator
 {
 public:
@@ -8,7 +9,9 @@ public:
 	ForceGenerator(TipeForces t, Vector3 _v, Vector3 _p1, Vector3 _p2);
 	~ForceGenerator();
 	bool Afecta(Particle* p);
+	bool Afecta(SolidRigidDynamic* obj);
 	void AddForce(Particle* p, double t);
+	void AddForce(SolidRigidDynamic* obj, double t);
 
 	//Torbellino
 	void configCentro(Vector3 _v) { Center = _v; }

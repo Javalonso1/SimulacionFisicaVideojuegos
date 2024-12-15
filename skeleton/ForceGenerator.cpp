@@ -47,8 +47,25 @@ bool ForceGenerator::Afecta(Particle* p)
 				(p->_p().p.y > Point1.y && p->_p().p.y < Point2.y) &&
 				(p->_p().p.z > Point1.z && p->_p().p.z < Point2.z);
 		}
+		else 	return false;
 	}
-	return false;
+
+}
+
+bool ForceGenerator::Afecta(SolidRigidDynamic* obj)
+{
+	if (myTipeforce == ForceGenerator::Torbellino) {
+		return (obj->_p()->p - Center).magnitude() < Radius;
+	}
+	else {
+		if (Global) return true;
+		if (Area) {
+			return (obj->_p()->p.x > Point1.x && obj->_p()->p.x < Point2.x) &&
+				(obj->_p()->p.y > Point1.y && obj->_p()->p.y < Point2.y) &&
+				(obj->_p()->p.z > Point1.z && obj->_p()->p.z < Point2.z);
+		}
+		else 	return false;
+	}
 }
 
 void ForceGenerator::AddForce(Particle* p, double t)
@@ -102,6 +119,58 @@ void ForceGenerator::AddForce(Particle* p, double t)
 
 		p->AddFuerza(f);
 
+		break;
+	default:
+		break;
+	}
+}
+
+void ForceGenerator::AddForce(SolidRigidDynamic* obj, double t)
+{
+	double r;
+	Vector3 f;
+	switch (myTipeforce)
+	{
+	case ForceGenerator::Viento:
+		//f = v - p->getVel();
+		obj->addForce(v);
+		break;
+	case ForceGenerator::Explosion:
+		_explT += t;
+		r = (obj->_p()->p - Center).magnitude();
+		if (r < Radius) {
+			double d;
+			d = v.magnitude() / pow(r, 2);
+			double xd = pow(2.7182818, (-1 * (_explT / _explTMax)));
+			d = d * xd;
+			f = obj->_p()->p - Center;
+			obj->addForce(f*d);			
+		}
+		break;
+	case ForceGenerator::Torbellino:
+		f = Vector3(-1 * (obj->_p()->p.z - Center.z), _torbPosY - (obj->_p()->p.y - Center.y), obj->_p()->p.x - Center.x);		
+		obj->addForce(f * v.magnitude());
+		break;
+	case ForceGenerator::Flotacion:
+		float _height;
+		_height = 1.0f;
+		float h;
+		h = obj->_p()->p.y;
+		float h0;
+		h0 = v.y;
+		float immersed;
+		if (h - h0 > _height * 0.5) {
+			immersed = 0.0;
+		}
+		else if (h0 - h > _height * 0.5) {
+			immersed = 1.0;
+		}
+		else {
+			immersed = (h0 - h) / _height + 0.5;
+		}
+		f.y = _liquid_density * _volume * immersed * 9.8;
+		
+		obj->addForce(f);
 		break;
 	default:
 		break;
