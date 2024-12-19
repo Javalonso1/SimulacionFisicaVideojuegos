@@ -2,14 +2,14 @@
 #include <random>
 
 GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa, double genTime,
-	double elimTime, double variation) : vel(Vel), pos(Pos), acel(Acel), dumping(Dumping),
+	double elimTime, double variation) : vel(Vel), pos(Pos), acel(Acel), dumping(Dumping), randomSpawn(false),
 	masaReal(Masa), GenTime(genTime), ElimTime(elimTime), Variation(variation), timeToNew(0), PorTiempo(true)
 {
 	constant = Variation == 0;	
 	CreateParticle();
 }
 GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa, double genTime,
-	Vector3 elimDist, double variation) : vel(Vel), pos(Pos), acel(Acel), dumping(Dumping),
+	Vector3 elimDist, double variation) : vel(Vel), pos(Pos), acel(Acel), dumping(Dumping), randomSpawn(false),
 	masaReal(Masa), GenTime(genTime), ElimDist(elimDist), Variation(variation), timeToNew(0), PorTiempo(false)
 {
 	if (ElimDist.x < 0) ElimDist.x = ElimDist.x * -1;
@@ -19,7 +19,7 @@ GeneradorParticulas::GeneradorParticulas(Vector3 Pos, Vector3 Vel, Vector3 Acel,
 	CreateParticle();
 }
 
-GeneradorParticulas::GeneradorParticulas(Vector3 Pos, PartGen g) : pos(Pos), vel(g.Vel), acel(g.Acel), dumping(g.Dumping),
+GeneradorParticulas::GeneradorParticulas(Vector3 Pos, PartGen g) : pos(Pos), vel(g.Vel), acel(g.Acel), dumping(g.Dumping), randomSpawn(false),
 masaReal(g.Masa), GenTime(g.genTime), Variation(g.variation), timeToNew(0), ElimDist(g.elimDist), ElimTime(g.elimTime), PorTiempo(g.porTiempo)
 {
 	if (!g.porTiempo) {
@@ -82,6 +82,25 @@ void GeneradorParticulas::integrate(double t)
 	}
 }
 
+void GeneradorParticulas::maxParticulas(int i)
+{
+	if(maxPart < i)	maxPart = i;
+	else {
+		if (PorTiempo) {
+			for (int j = i; j < p.size(); j++) {
+				time_p[j] = ElimTime;
+			}
+		}
+		else
+		{
+			for (int j = i; j < p.size(); j++) {
+				p[j]->DeletePorPos(pos.x + ElimDist.x*2);
+			}			
+		}
+		maxPart = i;
+	}
+}
+
 void GeneradorParticulas::CreateParticle()
 {	
 	double _x;
@@ -97,14 +116,33 @@ void GeneradorParticulas::CreateParticle()
 		std::mt19937 gen{ rd() };
 		std::normal_distribution<double> normal_x(vel.x, Variation);
 		_x = normal_x(gen);
-		std::normal_distribution<double> normal_y(vel.y, Variation);
-		_y = normal_y(gen);
+		if (IniYlock) {
+			_y = vel.y;
+		}
+		else {
+			std::normal_distribution<double> normal_y(vel.y, Variation);
+			_y = normal_y(gen);
+		}
 		std::normal_distribution<double> normal_z(vel.z, Variation);
 		_z = normal_z(gen);
 	}
 	Vector3 _v(_x, _y, _z);
 
-	Particle* _p = new Particle(pos, _v, acel, dumping, masaReal);
+	Particle* _p;
+	if (!randomSpawn) {
+		_p = new Particle(pos, _v, acel, dumping, masaReal);
+	}
+	else {
+		Vector3 _pos;
+		int i = ElimDist.x *2;
+		_pos.x = (rand() % i)- ElimDist.x;
+		i = ElimDist.y * 2; 
+		_pos.y = (rand() % (i-10));
+		i = ElimDist.z *2;
+		_pos.z = (rand() % i)- ElimDist.z;
+		_p = new Particle(_pos, _v, acel, dumping, masaReal);
+	}
+	if (colgris) _p->changeGray();
 	p.push_back(_p);
 	if(PorTiempo) time_p.push_back(0);
 }

@@ -290,6 +290,34 @@ void startRender(const PxVec3& cameraEye, const PxVec3& cameraDir, PxReal clipNe
 	glColor4f(1.0f, 0.2f, 0.2f, 1.0f);
 	drawText(display_text, 0, 0);
 
+	drawText(info_text1, 0, 500);
+	drawText(info_text2, 0, 480);
+	drawText(info_text3, 0, 460);
+	
+	drawText(controls_title, 200, 490);
+
+	drawText(controls_camera, 120, 460);
+	drawText(controls_camera2, 100, 435);
+
+	drawText(controls_nubes, 140, 400);
+	drawText(controls_nubes2, 90, 375);
+
+	drawText(controls_viento, 140, 340);
+	drawText(controls_viento2, 86, 315);
+	drawText(controls_viento3, 120, 290);
+	drawText(controls_viento4, 150, 265);
+
+	drawText(control_tornado, 126, 230);
+	drawText(control_tornado2, 86, 205);
+	drawText(control_tornado3, 96, 180);
+	drawText(control_tornado4, 150, 155);
+
+	drawText(control_basura, 138, 120);
+	drawText(control_basura2, 80, 95);
+	drawText(control_basura3, 145, 70);
+
+	drawText(control_exit, 110, 35);
+
 	// Setup camera
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

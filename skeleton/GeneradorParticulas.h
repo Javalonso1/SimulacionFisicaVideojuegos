@@ -19,8 +19,20 @@ public:
 
 	void AddForce(ForceGenerator* f) { myForces.push_back(f); }
 
-	void maxParticulas(int i) { maxPart = i; };
-	
+	void RemoveForce(int i) { myForces.erase(myForces.begin() + i); }
+
+	void maxParticulas(int i);
+
+	void setRandomSpawn() {
+		if (!PorTiempo) {
+			randomSpawn = true;
+		}
+	}
+	void setIniYLock(bool a) {
+		IniYlock = a;
+	}
+
+	void ChangeGray() { colgris = true; }
 private:
 	//Por tiempo
 	double ElimTime;
@@ -30,6 +42,8 @@ private:
 	bool PorTiempo;
 	//Si usa desviación normal o es constante
 	bool constant;
+
+	bool randomSpawn;
 	
 	double Variation;
 	double GenTime;
@@ -41,11 +55,14 @@ private:
 
 	int maxPart = -1;
 
+	bool IniYlock = false;	
+
 	std::vector<ForceGenerator*> myForces;
 	std::vector<Particle*> p;
 	std::vector<double> time_p;
 	double timeToNew;
 	void CreateParticle();
 
+	bool colgris = false;
 };
 

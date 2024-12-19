@@ -25,7 +25,7 @@ void Particle::Render() {
 	
 	PxShape* _s = CreateShape(PxSphereGeometry(1));
 
-	Vector4 v(1, 1, 1, 1);
+	Vector4 v(col, col, col, 1);
 
 	PxTransform* _t = new PxTransform(pos.p);
 	renderItem = new RenderItem(_s, _t, v);
@@ -43,6 +43,10 @@ void Particle::AddFuerza(Vector3 f)
 {
 	fuerza += f;
 	//acel = fuerza / masaReal;
+}
+void Particle::DeletePorPos(float x)
+{
+	pos.p.x = x;
 }
 void Particle::ModifyVel(double t) {
 	vel = vel + acel * t;

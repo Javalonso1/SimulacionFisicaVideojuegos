@@ -48,6 +48,26 @@
 #include <string>
 
 extern std::string display_text;
+extern std::string info_text1;
+extern std::string info_text2;
+extern std::string info_text3;
+extern std::string controls_title;
+extern std::string controls_camera;
+extern std::string controls_camera2;
+extern std::string controls_nubes;
+extern std::string controls_nubes2;
+extern std::string controls_viento;
+extern std::string controls_viento2;
+extern std::string controls_viento3;
+extern std::string controls_viento4;
+extern std::string control_tornado;
+extern std::string control_tornado2;
+extern std::string control_tornado3;
+extern std::string control_tornado4;
+extern std::string control_basura;
+extern std::string control_basura2;
+extern std::string control_basura3;
+extern std::string control_exit;
 
 namespace Snippets
 {

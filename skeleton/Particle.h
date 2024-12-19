@@ -26,6 +26,10 @@ public:
 	Vector3 getVel() { return vel;}
 
 	Vector3 getPos() { return pos.p; }
+
+	void changeGray() { col = 0.5f; }
+
+	void DeletePorPos(float x);
 private:
 	Vector3 vel;
 	Vector3 acel;	
@@ -35,5 +39,6 @@ private:
 	float dumping;
 	double masaReal;
 	void ModifyVel(double t);
+	float col = 1;
 };
 

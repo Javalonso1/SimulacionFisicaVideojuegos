@@ -26,9 +26,11 @@ void SistemaParticulas::AddGenerator(Vector3 Pos, Vector3 Vel, Vector3 Acel, flo
 	gen.push_back(new GeneradorParticulas(Pos, Vel,Acel,Dumping,Masa,GenTime,elimTime,variation));
 }
 
-void SistemaParticulas::AddGenerator(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa, double GenTime, Vector3 elimDist, double variation)
+GeneradorParticulas* SistemaParticulas::AddGenerator(Vector3 Pos, Vector3 Vel, Vector3 Acel, float Dumping, double Masa, double GenTime, Vector3 elimDist, double variation)
 {
-	gen.push_back(new GeneradorParticulas(Pos, Vel, Acel, Dumping, Masa, GenTime, elimDist, variation));
+	GeneradorParticulas* _g = new GeneradorParticulas(Pos, Vel, Acel, Dumping, Masa, GenTime, elimDist, variation);
+	gen.push_back(_g);
+	return _g;
 }
 
 GeneradorParticulas* SistemaParticulas::AddGenerator(Vector3 Pos, PartGen g)

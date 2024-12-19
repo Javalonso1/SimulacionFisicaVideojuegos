@@ -20,6 +20,9 @@
     <ClCompile Include="SolidRigidStatic.cpp" />
     <ClCompile Include="SolidRigidDynamic.cpp" />
     <ClCompile Include="GeneradorSolidosRigidos.cpp" />
+    <ClCompile Include="MapaGenerator.cpp" />
+    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="Barco.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -42,6 +45,12 @@
     <ClInclude Include="SolidRigidStatic.h" />
     <ClInclude Include="SolidRigidDynamic.h" />
     <ClInclude Include="GeneradorSolidosRigidos.h" />
+    <ClInclude Include="MapaGenerator.h" />
+    <ClInclude Include="Constants.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="Barco.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

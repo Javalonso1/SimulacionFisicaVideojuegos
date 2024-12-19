@@ -21,6 +21,8 @@ public:
 	void configLiquidDensity(float x) { _liquid_density = x; }
 	void configVolume(float x) { _volume = x; }	
 
+	void Name(std::string a) { nombre = a; };
+	std::string getName() { return nombre; };	
 private:
 	TipeForces myTipeforce;
 	Vector3 v;
@@ -40,4 +42,7 @@ private:
 	//Para la flotación
 	float _liquid_density = 1000;
 	float _volume = 1;	
+
+
+	std::string nombre = "";
 };
